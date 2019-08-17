@@ -17,4 +17,18 @@ public class RestauranteService {
         List<Restaurante> restauranteList = restauranteRepository.findAll();
         return restauranteList;
     }
+	
+	 public Restaurante findOne(Integer id) {
+        Restaurante restaurante= restauranteRepository.getOne(id);
+        return restaurante;
+    }
+    public String delete(Restaurante r) {
+        restauranteRepository.delete(r);
+        return "Borrado";
+    }
+
+    public String save(Restaurante r) {
+        restauranteRepository.save(r);
+        return "Insertado";
+    }
 }
