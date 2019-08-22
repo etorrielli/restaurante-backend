@@ -22,7 +22,7 @@ public class RestauranteController {
         return restauranteList;
     }
 	
-	@RestController
+/*	@RestController
 @RequestMapping("/")
 public class RestauranteController {
 
@@ -34,7 +34,7 @@ public class RestauranteController {
         List<Restaurante> restauranteList = restauranteService.findAll();
         return restauranteList;
     }
-
+*/
     //Consulto solo uno por identificador
     @GetMapping("/restaurante/{id}")
     public ResponseEntity<Restaurante> getrestoById(@PathVariable(value = "id") Integer restauranteId) {
