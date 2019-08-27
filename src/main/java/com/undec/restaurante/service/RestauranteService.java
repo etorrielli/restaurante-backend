@@ -17,8 +17,7 @@ public class RestauranteService {
         List<Restaurante> restauranteList = restauranteRepository.findAll();
         return restauranteList;
     }
-	
-	 public Restaurante findOne(Integer id) {
+    public Restaurante findOne(Integer id) {
         Restaurante restaurante= restauranteRepository.getOne(id);
         return restaurante;
     }
@@ -30,5 +29,10 @@ public class RestauranteService {
     public String save(Restaurante r) {
         restauranteRepository.save(r);
         return "Insertado";
+    }
+
+
+    public List<Restaurante> getrestoByPrecio(String precio){
+        return restauranteRepository.findAllByPrecio(precio);
     }
 }
