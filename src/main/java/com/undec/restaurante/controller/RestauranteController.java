@@ -89,4 +89,9 @@ public class RestauranteController {
         restauranteService.delete(restaurante);
         return ResponseEntity.ok().build();
     }
+	
+    @GetMapping("/restaurante/precio/{precio}")
+    public List<Restaurante> getrestoByPrecio(@PathVariable(value = "precio") String precio) {
+        return restauranteService.getrestoByPrecio(precio);
+    }
 }
