@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface RestauranteRepository extends JpaRepository<Restaurante, Integer> {
 
-    List<Restaurante> findAllByPrecio(String precio);
+     @Query("SELECT r FROM Restaurante r WHERE LOWER(r.precio) = LOWER(:precio2)")
+    List<Restaurante> findAllByPrecio(@Param("precio2") String precio);
 }
