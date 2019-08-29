@@ -1,11 +1,15 @@
 package com.undec.restaurante.service;
 
+import com.undec.restaurante.dto.Response;
 import com.undec.restaurante.model.Restaurante;
 import com.undec.restaurante.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class RestauranteService {
@@ -13,26 +17,44 @@ public class RestauranteService {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
-    public List<Restaurante> findAll() {
+    public Response findAll() {
+        Response response = null;
+        response.getMessaje();
         List<Restaurante> restauranteList = restauranteRepository.findAll();
-        return restauranteList;
-    }
-    public Restaurante findOne(Integer id) {
-        Restaurante restaurante= restauranteRepository.getOne(id);
-        return restaurante;
-    }
-    public String delete(Restaurante r) {
-        restauranteRepository.delete(r);
-        return "Borrado";
+        response.setData(restauranteList);
+        return response;
     }
 
-    public String save(Restaurante r) {
-        restauranteRepository.save(r);
-        return "Insertado";
+    public Response findOne(Integer id) throws Exception {
+        Response response = new Response();
+        Restaurante restaurante = restauranteRepository.findById(id).get();
+        response.setData(restaurante);
+        return response;
     }
 
+    public Response delete(Integer id) {
+        Response response = new Response();
+        restauranteRepository.delete(restauranteRepository.getOne(id));
+        response.setData("ok");
+        return response;
+    }
 
-    public List<Restaurante> getrestoByPrecio(String precio){
-        return restauranteRepository.findAllByPrecio(precio);
+    public Response update(Restaurante input) {
+        Response response = new Response();
+        restauranteRepository.save(input);
+        response.setData("ok");
+        return response;
+    }
+
+    public Response save(Restaurante r) {
+        Response response = new Response();
+        response.setData(restauranteRepository.save(r));
+        return response;
+    }
+
+    public Response getrestoByPrecio(String precio) {
+        Response response = new Response();
+        response.setData(restauranteRepository.findAllByPrecio(precio));
+        return response;
     }
 }

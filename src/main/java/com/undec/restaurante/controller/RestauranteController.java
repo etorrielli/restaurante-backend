@@ -1,97 +1,67 @@
 package com.undec.restaurante.controller;
 
+import com.undec.restaurante.dto.Response;
 import com.undec.restaurante.model.Restaurante;
 import com.undec.restaurante.service.RestauranteService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/restaurantes")
 public class RestauranteController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(RestauranteController.class);
+
     @Autowired
     private RestauranteService restauranteService;
 
     @GetMapping
-    public List<Restaurante> list() {
-        List<Restaurante> restauranteList = restauranteService.findAll();
-        return restauranteList;
-    }
-	
-/*	@RestController
-@RequestMapping("/")
-public class RestauranteController {
-
-    @Autowired
-    private RestauranteService restauranteService;
-
-    @GetMapping("/restaurantes")
-    public List<Restaurante> list() {
-        List<Restaurante> restauranteList = restauranteService.findAll();
-        return restauranteList;
-    }
-*/
-    //Consulto solo uno por identificador
-    @GetMapping("/restaurante/{id}")
-    public ResponseEntity<Restaurante> getrestoById(@PathVariable(value = "id") Integer restauranteId) {
-        System.out.println("entro por getid-----------------------------------------------------------");
-
-        Restaurante restaurante = restauranteService.findOne(restauranteId);
-
-        System.out.println("entro por getid----------2-------------------------------------------------"+restaurante.getDescripcion());
-        if(restaurante == null) {
-            System.out.println("entro por getid---------3--------------------------------------------------");
-            return ResponseEntity.notFound().build();
-        }
-        System.out.println("entro por getid-------------------4----------------------------------------");
-        return ResponseEntity.ok(restaurante);
-
+    public ResponseEntity<Response> list() {
+        Response response = restauranteService.findAll();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //crea un solo restaurante
-    @PostMapping("/restaurante")
-    public String create(@Valid @RequestBody Restaurante restaurante) {
-
-        return restauranteService.save(restaurante);
+    // Consulto solo uno por identificador
+    @GetMapping("/{id}")
+    public ResponseEntity<Response> getRestoById(@PathVariable(value = "id") Integer restauranteId) throws Exception {
+        Response response = restauranteService.findOne(restauranteId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //Actualiza
-    @PutMapping("/restaurantes/{id}")
-    public ResponseEntity<Restaurante> update(@PathVariable(value = "id") Integer restauranteId,
-                                                @Valid @RequestBody Restaurante restauranteRestaurante) {
-        Restaurante restaurante = restauranteService.findOne(restauranteId);
-        if(restaurante == null) {
-            return ResponseEntity.notFound().build();
-        }
-        //restaurante.setId(restauranteRestaurante.getId());
-        restaurante.setNombre(restauranteRestaurante.getNombre());
-        restaurante.setDescripcion(restauranteRestaurante.getDescripcion());
-        restaurante.setDireccion(restauranteRestaurante.getDireccion());
-        restaurante.setImagen(restauranteRestaurante.getImagen());
-        restaurante.setPrecio(restauranteRestaurante.getPrecio());
-
-        restauranteService.save(restaurante);
-        return ResponseEntity.ok(restaurante);
+    // crea un solo restaurante
+    @PostMapping()
+    public ResponseEntity<Response> create(@Valid @RequestBody Restaurante restaurante) {
+        Response response = restauranteService.save(restaurante);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //borra
-    @DeleteMapping("/restaurantes/{id}")
-    public ResponseEntity<Restaurante> delete(@PathVariable(value = "id") Integer restauranteId) {
-        Restaurante restaurante = restauranteService.findOne(restauranteId);
-        if(restaurante == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        restauranteService.delete(restaurante);
-        return ResponseEntity.ok().build();
+    // Actualiza
+    @PutMapping("/{id}")
+    public ResponseEntity<Response> update(@PathVariable(value = "id") Integer restauranteId,
+                                           @Valid @RequestBody Restaurante input) {
+        Response response = restauranteService.update(input);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-	
-    @GetMapping("/restaurante/precio/{precio}")
-    public List<Restaurante> getrestoByPrecio(@PathVariable(value = "precio") String precio) {
-        return restauranteService.getrestoByPrecio(precio);
+
+    // borra
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response> delete(@PathVariable(value = "id") Integer restauranteId) {
+        Response response = restauranteService.delete(restauranteId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/precio/{precio}")
+    public ResponseEntity<Response> getrestoByPrecio(@PathVariable(value = "precio") String precio) {
+        Response response = restauranteService.getrestoByPrecio(precio);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
