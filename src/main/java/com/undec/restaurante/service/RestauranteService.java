@@ -18,8 +18,7 @@ public class RestauranteService {
     private RestauranteRepository restauranteRepository;
 
     public Response findAll() {
-        Response response = null;
-        response.getMessaje();
+        Response response = new Response();
         List<Restaurante> restauranteList = restauranteRepository.findAll();
         response.setData(restauranteList);
         return response;

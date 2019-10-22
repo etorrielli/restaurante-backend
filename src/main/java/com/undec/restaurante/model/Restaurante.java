@@ -14,6 +14,7 @@ public class Restaurante implements Serializable {
     private String descripcion;
     private String imagen;
     private String precio;
+    private String categoria;
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -75,6 +76,14 @@ public class Restaurante implements Serializable {
 
     public void setPrecio(String precio) {
         this.precio = precio;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     @Override
