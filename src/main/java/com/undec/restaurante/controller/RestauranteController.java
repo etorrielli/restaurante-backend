@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/restaurantes")
 public class RestauranteController {
