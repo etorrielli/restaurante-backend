@@ -3,6 +3,7 @@ package com.undec.restaurante;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @SpringBootApplication
@@ -10,7 +11,7 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 		RestauranteBackendApplication.class,
         Jsr310JpaConverters.class
 })
-public class RestauranteBackendApplication {
+public class RestauranteBackendApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestauranteBackendApplication.class, args);

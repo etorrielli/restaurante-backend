@@ -8,9 +8,10 @@
 		<version>2.2.0.BUILD-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<packaging>war</packaging>
 	<groupId>com.undec</groupId>
 	<artifactId>restaurante</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>restaurante-backend</name>
 	<description>Demo project for Spring Boot</description>
 
