@@ -18,6 +18,35 @@ USE `app_restaurante`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `reserva`
+--
+
+DROP TABLE IF EXISTS `reserva`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reserva` (
+                           `id` int(11) NOT NULL,
+                           `restaurante` varchar(250) DEFAULT NULL,
+                           `nombre` varchar(250) DEFAULT NULL,
+                           `apellido` varchar(250) DEFAULT NULL,
+                           `dni` varchar(45) DEFAULT NULL,
+                           `email` varchar(250) DEFAULT NULL,
+                           `fecha` varchar(45) DEFAULT NULL,
+                           `hora` varchar(45) DEFAULT NULL,
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reserva`
+--
+
+LOCK TABLES `reserva` WRITE;
+/*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `restaurante`
 --
 
@@ -25,15 +54,15 @@ DROP TABLE IF EXISTS `restaurante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `restaurante` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) DEFAULT NULL,
-  `direccion` varchar(255) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL,
-  `precio` varchar(255) DEFAULT NULL,
-  `categoria` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                               `id` int(11) NOT NULL AUTO_INCREMENT,
+                               `nombre` varchar(255) DEFAULT NULL,
+                               `direccion` varchar(255) DEFAULT NULL,
+                               `descripcion` varchar(255) DEFAULT NULL,
+                               `imagen` varchar(255) DEFAULT NULL,
+                               `precio` varchar(255) DEFAULT NULL,
+                               `categoria` varchar(255) DEFAULT NULL,
+                               `url` varchar(255) DEFAULT NULL,
+                               PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,4 +85,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-05 20:24:40
+-- Dump completed on 2019-12-14 13:01:35
