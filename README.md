@@ -3,8 +3,8 @@ Proyecto backend de restaurante cuyo objetivo es proveer servicios REST con las 
 
 ### Tecnologias utilizadas:
 - Maven
-- JDK8
-- Spring Boot 2.2.0
+- JDK11+
+- Spring Boot 2.x
 - MySQL 5.x
 
 ### Generacion del proyecto base:
